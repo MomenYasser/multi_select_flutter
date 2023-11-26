@@ -23,6 +23,9 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
   /// Toggles search functionality. Default is false.
   final bool searchable;
 
+  /// Toggles sactions directions.
+  final bool? reverseActions = false;
+
   /// Text on the confirm button.
   final Text? confirmText;
 
@@ -90,6 +93,7 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
     this.cancelText,
     this.selectedColor,
     this.searchHint,
+    this.reverseActions,
     this.height,
     this.width,
     this.colorator,
@@ -216,6 +220,39 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> actions = [
+        TextButton(
+          child: widget.cancelText ??
+              Text(
+                "CANCEL",
+                style: TextStyle(
+                  color: (widget.selectedColor != null &&
+                          widget.selectedColor != Colors.transparent)
+                      ? widget.selectedColor!.withOpacity(1)
+                      : Theme.of(context).primaryColor,
+                ),
+              ),
+          onPressed: () {
+            widget.onCancelTap(context, widget.initialValue);
+          },
+        ),
+        TextButton(
+          child: widget.confirmText ??
+              Text(
+                'OK',
+                style: TextStyle(
+                  color: (widget.selectedColor != null &&
+                          widget.selectedColor != Colors.transparent)
+                      ? widget.selectedColor!.withOpacity(1)
+                      : Theme.of(context).primaryColor,
+                ),
+              ),
+          onPressed: () {
+            widget.onConfirmTap(context, _selectedValues, widget.onConfirm);
+          },
+        )
+      ];
+    
     return AlertDialog(
       backgroundColor: widget.backgroundColor,
       title: widget.searchable == false
@@ -296,38 +333,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
                 ),
               ),
       ),
-      actions: <Widget>[
-        TextButton(
-          child: widget.cancelText ??
-              Text(
-                "CANCEL",
-                style: TextStyle(
-                  color: (widget.selectedColor != null &&
-                          widget.selectedColor != Colors.transparent)
-                      ? widget.selectedColor!.withOpacity(1)
-                      : Theme.of(context).primaryColor,
-                ),
-              ),
-          onPressed: () {
-            widget.onCancelTap(context, widget.initialValue);
-          },
-        ),
-        TextButton(
-          child: widget.confirmText ??
-              Text(
-                'OK',
-                style: TextStyle(
-                  color: (widget.selectedColor != null &&
-                          widget.selectedColor != Colors.transparent)
-                      ? widget.selectedColor!.withOpacity(1)
-                      : Theme.of(context).primaryColor,
-                ),
-              ),
-          onPressed: () {
-            widget.onConfirmTap(context, _selectedValues, widget.onConfirm);
-          },
-        )
-      ],
+      actions: widget.reverseActions ? actions.reversed.toList() : actions,
     );
   }
 }

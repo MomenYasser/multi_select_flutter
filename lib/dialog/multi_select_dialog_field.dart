@@ -42,6 +42,9 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Toggles search functionality.
   final bool searchable;
 
+  /// Toggles actions directions.
+  final bool reverseActions;
+
   /// Text on the confirm button.
   final Text? confirmText;
 
@@ -117,6 +120,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.onSelectionChanged,
     this.chipDisplay,
     this.searchable = false,
+    this.reverseActions = false,
     this.confirmText,
     this.cancelText,
     this.barrierColor,
@@ -198,6 +202,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final List<V> initialValue;
   final void Function(List<V>)? onConfirm;
   final bool? searchable;
+  final bool? reverseActions;
   final Text? confirmText;
   final Text? cancelText;
   final Color? barrierColor;
@@ -231,6 +236,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     this.chipDisplay,
     this.initialValue = const [],
     this.searchable,
+    this.reverseActions,
     this.confirmText,
     this.cancelText,
     this.barrierColor,
@@ -266,6 +272,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         chipDisplay = field.chipDisplay,
         initialValue = field.initialValue,
         searchable = field.searchable,
+        reverseActions = field.reverseActions,
         confirmText = field.confirmText,
         cancelText = field.cancelText,
         barrierColor = field.barrierColor,
@@ -397,6 +404,7 @@ class __MultiSelectDialogFieldViewState<V>
           height: widget.dialogHeight,
           width: widget.dialogWidth,
           listType: widget.listType,
+          reverseActions: widget.reverseActions,
           items: widget.items,
           title: widget.title ?? const Text("Select"),
           initialValue: _selectedItems,
