@@ -236,7 +236,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     this.chipDisplay,
     this.initialValue = const [],
     this.searchable,
-    this.reverseActions,
+    this.reverseActions = false,
     this.confirmText,
     this.cancelText,
     this.barrierColor,

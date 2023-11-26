@@ -93,7 +93,7 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
     this.cancelText,
     this.selectedColor,
     this.searchHint,
-    this.reverseActions,
+    this.reverseActions = false,
     this.height,
     this.width,
     this.colorator,
@@ -220,7 +220,8 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> actions = [
+    List<Widget> getActions() {
+      final List<Widget> actions = [
         TextButton(
           child: widget.cancelText ??
               Text(
@@ -252,6 +253,14 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
           },
         )
       ];
+
+      if (widget.reverseActions == true) {
+        return actions.reversed.toList();
+      }
+
+
+      return actions;
+    };
     
     return AlertDialog(
       backgroundColor: widget.backgroundColor,
@@ -333,7 +342,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
                 ),
               ),
       ),
-      actions: actions.reversed.toList(),
+      actions: getActions(),
     );
   }
 }
