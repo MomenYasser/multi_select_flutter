@@ -170,6 +170,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 barrierColor: barrierColor,
                 selectedColor: selectedColor,
                 searchHint: searchHint,
+                reverseActions: reverseActions,
                 dialogHeight: dialogHeight,
                 dialogWidth: dialogWidth,
                 colorator: colorator,
