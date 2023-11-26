@@ -333,7 +333,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
                 ),
               ),
       ),
-      actions: widget.reverseActions ? actions.reversed.toList() : actions,
+      actions: widget.reverseActions == true ? actions.reversed.toList() : actions,
     );
   }
 }
