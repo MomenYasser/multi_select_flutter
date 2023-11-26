@@ -24,7 +24,7 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
   final bool searchable;
 
   /// Toggles sactions directions.
-  final bool? reverseActions = false;
+  final bool? reverseActions;
 
   /// Text on the confirm button.
   final Text? confirmText;
